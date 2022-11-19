@@ -32,24 +32,14 @@ function utilikazh.error.notice(_err)
     computer.beep()
 end
 
--- Misc
-
-function utilikazh.version()
-    return version
-end
-
 -- Serialization
 
 function utilikazh.serial.encode(_data)
-    return serialization.serialize(_data)
+    return pcall(serialization.serialize, _data)
 end
 
 function utilikazh.serial.decode(_data)
-    local success, result pcall(serialization.unserialize, _data)
-    if success then
-        return result
-    end
-    return nil, result
+    return pcall(serialization.unserialize, _data)
 end
 
 -- UUID
@@ -67,4 +57,10 @@ end
 function utilikazh.uuid.isuuid(_uuid)
     local success, result = pcall(string.match, _uuid, '^%x%x%x%x%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%x%x%x%x%x%x%x%x$')
     return success and result ~= nil
+end
+
+-- Misc
+
+function utilikazh.version()
+    return version
 end
