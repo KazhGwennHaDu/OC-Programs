@@ -61,5 +61,4 @@ function dns.version()
     return version
 end
 
-host = dns.whodns()
 return dns
