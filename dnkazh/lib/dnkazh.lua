@@ -9,11 +9,12 @@
 local version = 1.0
 
 local port = 53
-local host
+local host = nil
 
 local event = require('event')
 local component = require('component')
 
+local uuid = require('utilikazh').uuid
 local error = require('utilikazh').error
 local serial = require('utilikazh').serial
 
@@ -33,6 +34,15 @@ function dns.setPort(_port)
     local n = tonumber(_port)
     if n ~= nil then
         port = _port
+    end
+end
+
+function dns.getHost()
+    return host
+end
+function dns.setHost(_addr)
+    if uuid.isuuid(_addr) then
+        host = _addr
     end
 end
 
