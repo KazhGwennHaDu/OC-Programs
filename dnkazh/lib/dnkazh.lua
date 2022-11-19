@@ -26,6 +26,16 @@ local modem = component.modem
 -- API
 local dns = {}
 
+function dns.getPort()
+    return port
+end
+function dns.setPort(_port)
+    local n = tonumber(_port)
+    if n ~= nil then
+        port = _port
+    end
+end
+
 function dns.whodns()
     local _, payload = serial.encode({request = 'whodns'})
     modem.broadcast(port, payload)
