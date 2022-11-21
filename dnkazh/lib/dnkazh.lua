@@ -57,6 +57,15 @@ function dns.whodns()
     return remote
 end
 
+function dns.autoSetHost()
+    local addr = dns.whodns()
+    if addr then
+        host = addr
+        return true
+    end
+    return false
+end
+
 function dns.register(_name, ...)
     local _addr = ...
     local data = {
