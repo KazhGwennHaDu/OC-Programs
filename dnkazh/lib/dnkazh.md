@@ -42,6 +42,14 @@ Returns `nil` if the request times out.
 
     1. `uuid` | `nil` The address of the server.
 
+## `autoSetHost()`
+
+Sets the address of the DNS server via `whodns()`.
+
++ ### Returns
+
+    1. `boolean` Success of the operation.
+
 ## `register(_name[, _addr])`
 
 Registers a domaine to the DNS server.
