@@ -51,8 +51,8 @@ function dns.whodns()
     modem.broadcast(port, payload)
 
     modem.open(port)
-    local _, payload = serial.encode({response = 'whodns'}) -- Payload to receive
-    local _,_, remote = event.pull(5, 'modem_message', nil, nil, port, nil, payload)
+    local _, filter = serial.encode({response = 'whodns'}) -- Payload to receive
+    local _,_, remote = event.pull(5, 'modem_message', nil, nil, port, nil, filter)
     modem.close(port)
     return remote
 end
