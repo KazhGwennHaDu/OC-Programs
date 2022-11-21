@@ -14,7 +14,7 @@ Sets the port used by the API, default is `53`
 
 + ### Parameters
 
-    1. `number`
+    1. _port : `number`
 
 ## `getHost()`
 
@@ -24,17 +24,19 @@ Returns the address of the DNS server, default is `nil`.
 
     1. `uuid`
 
-## `setHost(_port)`
+## `setHost(_addr)`
 
 Sets the address of the DNS server, default is `nil`.
 
 + ### Parameters
 
-    1. `uuid`
+    1. _addr : `uuid`
 
 ## `whodns()`
 
 Requests the address of the DNS server via broadcast.
+
+Returns `nil` if the request times out.
 
 + ### Returns
 
