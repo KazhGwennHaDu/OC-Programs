@@ -39,3 +39,17 @@ Requests the address of the DNS server via broadcast.
 + ### Returns
 
     1. `uuid` | `nil` The address of the server.
+
+## `register(_name[, _addr])`
+
+Registers a domaine to the DNS server.
+
++ ### Parameters
+
+    1. _name : `string` The name of the domaine to register.
+    2. _addr? : `uuid` The address of a computer, if not provided the local computer address will be used.
+
++ ### Returns
+
+    1. `boolean` Success of the registration.
+    2. `string` | `nil` Reason of failure.
