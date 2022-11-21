@@ -57,6 +57,45 @@ function dns.whodns()
     return remote
 end
 
+function dns.register(_name, ...)
+    local _addr = ...
+    local data = {
+        request = 'register',
+        name = tostring(_name)
+    }
+    if _addr then
+        if not uuid.isuuid(_addr) then
+            return false, 'Address malformed'
+        end
+        data.addr = _addr
+    end
+    local success, payload = serial.encode(data)
+    if not success then
+        return false, 'Couldn\'t encode data'
+    end
+    modem.send(host, port, payload)
+
+    modem.open(port)
+    local evt,_,_,_,_, payload = event.pull(5, 'modem_message', nil, host, port)
+    modem.close(port)
+
+    if evt == nil then
+        return false, 'Timed out'
+    end
+    local success, data = serial.decode(payload)
+    if not success then
+        return false, 'Couldn\'t decode received data'
+    end
+
+    if data.response ~= 'register' then
+        return false, 'Received data malformed'
+    end
+    if not data.result then
+        return false, tostring(data.reason)
+    end
+    return true, nil
+end
+
 function dns.version()
     return version
 end
