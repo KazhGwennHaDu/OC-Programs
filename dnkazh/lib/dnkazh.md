@@ -97,3 +97,29 @@ Unregisters a domaine from the DNS server via the address of the computer.
 
     1. `boolean` Success of the unregistration.
     2. `string` | `nil` Reason of failure.
+
+## `lookup(_name)`
+
+Asks the DNS server the address of the given domaine.
+
++ ### Parameters
+
+    1. _name : `string` The name of the domaine to lookup.
+
++ ### Returns
+
+    1. `boolean` Success of the lookup.
+    2. `string` | `nil` The domaine or the reason of failure.
+
+## `rlookup(_addr)`
+
+Asks the DNS server the domaine of the given address.
+
++ ### Parameters
+
+    1. _addr : `uuid` The address of a computer to lookup.
+
++ ### Returns
+
+    1. `boolean` Success of the lookup.
+    2. `uuid` | `string` | `nil` The address or the reason of failure.
