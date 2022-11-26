@@ -1,9 +1,9 @@
 # OC-Programs
 
-## [UtiliKazh](/utilikazh/Utilikazh.md)
+## [UtiliKazh](/utilikazh/utilikazh.md)
 
 A utility functions I use in my programs.
 
-## [DNKazh API (WIP)](/dnkazh/lib/dnkazh.md)
+## [DNKazh API](/dnkazh/lib/dnkazh.md)
 
 A DNS API
