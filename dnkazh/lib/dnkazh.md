@@ -71,3 +71,29 @@ Registers a domaine to the DNS server.
 
     1. `boolean` Success of the registration.
     2. `string` | `nil` Reason of failure.
+
+## `unregister(_name)`
+
+Registers a domaine to the DNS server.
+
++ ### Parameters
+
+    1. _name : `string` The name of the domaine to unregister.
+
++ ### Returns
+
+    1. `boolean` Success of the unregistration.
+    2. `string` | `nil` Reason of failure.
+
+## `runregister(_addr)`
+
+Registers a domaine to the DNS server.
+
++ ### Parameters
+
+    1. _addr : `uuid` The address of a computer to unregister.
+
++ ### Returns
+
+    1. `boolean` Success of the unregistration.
+    2. `string` | `nil` Reason of failure.
