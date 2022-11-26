@@ -176,6 +176,38 @@ function dns.runregister(_addr)
     return true, nil
 end
 
+function dns.lookup(_name)
+    local data = {
+        request = 'lookup',
+        name = _name
+    }
+    local success, payload = serial.encode(data)
+    if not success then
+        return false, 'Couldn\'t encode data'
+    end
+    modem.send(host, port, payload)
+
+    modem.open(port)
+    local evt,_,_,_,_, payload = event.pull(5, 'modem_message', nil, host, port)
+    modem.close(port)
+
+    if evt == nil then
+        return false, 'Timed out'
+    end
+    local success, data = serial.decode(payload)
+    if not success then
+        return false, 'Couldn\'t decode received data'
+    end
+
+    if data.response ~= 'lookup' then
+        return false, 'Received data malformed'
+    end
+    if not data.result then
+        return false, tostring(data.reason)
+    end
+    return true, data.result
+end
+
 function dns.version()
     return version
 end
