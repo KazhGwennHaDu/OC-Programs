@@ -74,7 +74,7 @@ Registers a domaine to the DNS server.
 
 ## `unregister(_name)`
 
-Registers a domaine to the DNS server.
+Unregisters a domaine from the DNS server.
 
 + ### Parameters
 
@@ -87,7 +87,7 @@ Registers a domaine to the DNS server.
 
 ## `runregister(_addr)`
 
-Registers a domaine to the DNS server.
+Unregisters a domaine from the DNS server via the address of the computer.
 
 + ### Parameters
 
