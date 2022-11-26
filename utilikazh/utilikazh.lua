@@ -64,3 +64,5 @@ end
 function utilikazh.version()
     return version
 end
+
+return utilikazh
