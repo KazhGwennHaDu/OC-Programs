@@ -34,7 +34,9 @@ function dns.setPort(_port)
     local n = tonumber(_port)
     if n ~= nil then
         port = _port
+        return true
     end
+    return false
 end
 
 function dns.getHost()
@@ -43,7 +45,9 @@ end
 function dns.setHost(_addr)
     if uuid.isuuid(_addr) then
         host = _addr
+        return true
     end
+    return false
 end
 
 function dns.whodns()

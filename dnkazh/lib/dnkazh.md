@@ -16,6 +16,10 @@ Sets the port used by the API, default is `53`
 
     1. _port : `number`
 
++ ### Returns
+
+    1. `boolean` Success of the operation.
+
 ## `getHost()`
 
 Returns the address of the DNS server, default is `nil`.
@@ -31,6 +35,10 @@ Sets the address of the DNS server, default is `nil`.
 + ### Parameters
 
     1. _addr : `uuid`
+
++ ### Returns
+
+    1. `boolean` Success of the operation.
 
 ## `whodns()`
 
