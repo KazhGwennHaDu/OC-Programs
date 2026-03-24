@@ -19,7 +19,7 @@ local this = {
     config = nil,
     sessions = {},
 
-    stop_sig = function () return interrupt_sig end,
+    stop_sig = nil,
 }
 
 local function interrupt_handler()
@@ -39,6 +39,8 @@ function service.run(stop_sig)
     if stop_sig then
         this.stop_sig = stop_sig
     else
+        interrupt_sig = false
+        this.stop_sig = function () return interrupt_sig end
         event.listen("interrupted", interrupt_handler)
     end
 
