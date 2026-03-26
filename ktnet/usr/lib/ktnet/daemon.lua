@@ -34,7 +34,7 @@ function daemon.stop()
         d_thread:resume()
     end
     repeat
-        os.sleep()
+        os.sleep(0.05)
     until d_thread:status() == "dead"
     d_thread = nil
     return true, nil

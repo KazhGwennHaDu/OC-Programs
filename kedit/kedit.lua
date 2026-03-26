@@ -30,7 +30,7 @@ local running = true
 -- PROGRAM LOOP
 
 while running do
-  os.sleep()
+  os.sleep(0.05)
 end
 
 -- EXIT
