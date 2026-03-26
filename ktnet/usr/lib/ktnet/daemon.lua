@@ -4,6 +4,7 @@ local service = require "ktnet.service"
 
 -- Private
 
+---@type OC.ThreadHandle?
 local d_thread = nil
 local stop_sig = false
 

@@ -16,6 +16,7 @@ end
 
 -- rc.d
 
+---@diagnostic disable-next-line: lowercase-global
 function start()
     local ok, reason = daemon.start()
     if not ok then
@@ -23,6 +24,7 @@ function start()
     end
 end
 
+---@diagnostic disable-next-line: lowercase-global
 function stop()
     local ok, reason = daemon.stop()
     if not ok then
@@ -30,6 +32,7 @@ function stop()
     end
 end
 
+---@diagnostic disable-next-line: lowercase-global
 function status()
     local status = daemon.status()
     local color = getStatusColor(status)

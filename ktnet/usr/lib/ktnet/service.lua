@@ -17,6 +17,7 @@ local interrupt_sig = false
 
 local this = {
     config = nil,
+    ---@type table<string, OC.ThreadHandle>
     sessions = {},
 
     stop_sig = nil,
@@ -60,7 +61,10 @@ function service.run(stop_sig)
                 -- What to do if session already exists ?
             end
         end
-        -- Clean sessions
+
+        -- Clean dead sessions
+
+        ---@type string[]
         local to_delete = {}
         for k, t in pairs(this.sessions) do
             if t:status() == "dead" then
