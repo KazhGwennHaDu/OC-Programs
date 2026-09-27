@@ -1,5 +1,4 @@
----@class uuidlib
----@field next function
+---@class KUtil.UUID:OC.UUID
 local uuid = require "uuid"
 
 local UUID_MATCH = "%x%x%x%x%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%x%x%x%x%x%x%x%x"
