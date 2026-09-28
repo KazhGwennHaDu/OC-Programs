@@ -2,6 +2,51 @@
 
 ## daemon
 
+## string
+
+string base library extension.
+
+### `split(s, delimiter)`
+
+Splits a string into an array of strings by the delimiter.
+
+- **Parameters**
+    1. `string` The string to split.
+    2. `string` The delimiter used to split the string.
+
+- **Returns**
+    1. `string[]` The split string array.
+
+### `trim(s)`
+
+Trims a string of the spaces.
+
+- **Parameters**
+    1. `string` The string to trim.
+
+- **Returns**
+    1. `string` The trimed string.
+
+### `ltrim(s)`
+
+Trims a string of the spaces to its left.
+
+- **Parameters**
+    1. `string` The string to trim.
+
+- **Returns**
+    1. `string` The trimed string.
+
+### `rtrim(s)`
+
+Trims a string of the spaces to its right.
+
+- **Parameters**
+    1. `string` The string to trim.
+
+- **Returns**
+    1. `string` The trimed string.
+
 ## uuid
 
 uuid base library extension.
