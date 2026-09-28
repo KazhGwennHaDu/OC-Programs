@@ -20,6 +20,7 @@ local thread_handle_api = {}
 --- `t:resume()` is only necessary to resume a thread that has been suspended(`t:suspend()`).
 --- 
 --- Note that because you are not directly resuming the thread any exceptions thrown from the thread are absorbed by the threading library and not exposed to your process.
+--- 
 ---@return boolean, string?
 function thread_handle_api:resume() end
 
@@ -38,6 +39,7 @@ function thread_handle_api:resume() end
 --- Please note that if you suspend a thread that is blocked waiting for an event, it is unspecified which event the thread will receive when it is next resumed.
 --- 
 --- Note: Suspending the current thread causes the thread to immediately yield and does not resume until `t:resume()` is called explicitly elsewhere. 
+--- 
 ---@return boolean, string?
 function thread_handle_api:suspend() end
 
@@ -48,6 +50,7 @@ function thread_handle_api:suspend() end
 --- 
 --- Keep in mind that the core underlying Lua type is a coroutine which is not a preemptive thread.
 --- Thus, the thread's stopping points are deterministic, meaning that you can predict exactly where the thread will stop.
+--- 
 function thread_handle_api:kill() end
 
 --- Returns the thread status as a string.
@@ -80,6 +83,7 @@ function thread_handle_api:kill() end
 ---   It cannot be resumed(`t:resume()`) nor suspended(`t:suspend()`).
 ---   A dead thread does not block a parent process from closing.
 ---   Killing a dead thread is not an error but does nothing.
+--- 
 ---@return OC.ThreadHandle.Status
 function thread_handle_api:status() end
 
@@ -91,6 +95,7 @@ function thread_handle_api:status() end
 --- This method returns nil and an error message if `level` refers to a nonexistent process, otherwise it returns truthy.
 ---
 --- An attached thread blocks its parent process from closing until the thread dies (or is killed, or the parent process aborts).
+--- 
 ---@param level number?
 ---@return boolean, string?
 function thread_handle_api:attach(level) end
@@ -100,6 +105,7 @@ function thread_handle_api:attach(level) end
 --- Returns nil and an error message if no action was taken, otherwise returns self (handy if you want to create and detach a thread in one line).
 --- 
 --- A detached thread will continue to run until the computer is shutdown or rebooted, or the thread dies.
+--- 
 ---@return OC.ThreadHandle, string?
 function thread_handle_api:detach() end
 
@@ -115,6 +121,7 @@ function thread_handle_api:detach() end
 --- Calling `thread.waitForAll({t})` is functionally equivalent to calling `t:join()`.
 --- When a process is closing it will call `thread.waitForAll()` on the group of its child threads if it has any.
 --- A child thread blocks its parent thread by the same machanism.
+--- 
 ---@param timeout number
 ---@return boolean, string?
 function thread_handle_api:join(timeout) end
@@ -124,35 +131,39 @@ function thread_handle_api:join(timeout) end
 ---@class OC.Thread
 local thread_api = {}
 
----Starts a new thread executing the function `thread_proc` and returns its thread handle,
----see [Thread Handle API](https://ocdoc.cil.li/api:thread#thread_handle_api).
----
----This method takes an optional `...` which is passed to `thread_proc`.
----The runtime of the thread continues autonomously.
+--- Starts a new thread executing the function `thread_proc` and returns its thread handle,
+--- see [Thread Handle API](https://ocdoc.cil.li/api:thread#thread_handle_api).
+--- 
+--- This method takes an optional `...` which is passed to `thread_proc`.
+--- The runtime of the thread continues autonomously.
+--- 
 ---@param thread_proc function
 ---@param ... any
 ---@return OC.ThreadHandle
 function thread_api.create(thread_proc, ...) end
 
----Returns the current thread handle.
----
----The init process does not represent a thread and nothing is returned
----from this method if called from the init process and not inside any thread.
+--- Returns the current thread handle.
+--- 
+--- The init process does not represent a thread and nothing is returned
+--- from this method if called from the init process and not inside any thread.
+--- 
 ---@return OC.ThreadHandle?
 function thread_api.current() end
 
----Waits for the array of threads to complete.
----
----This blocking call can return in timeout seconds if provided.
----Returns success and an error message on failure.
----
----A thread is “completed” under multiple conditions, see `t:join()` for details.
+--- Waits for the array of threads to complete.
+--- 
+--- This blocking call can return in timeout seconds if provided.
+--- Returns success and an error message on failure.
+--- 
+--- A thread is “completed” under multiple conditions, see `t:join()` for details.
+--- 
 ---@param threads OC.ThreadHandle[]
 ---@param timeout number
 ---@return boolean, string?
 function thread_api.waitForAll(threads, timeout) end
 
----Waits for any single thread to complete and is otherwise equivalent to `thread.waitForAll()`.
+--- Waits for any single thread to complete and is otherwise equivalent to `thread.waitForAll()`.
+--- 
 ---@param threads OC.ThreadHandle[]
 ---@param timeout number
 ---@return boolean, string?
