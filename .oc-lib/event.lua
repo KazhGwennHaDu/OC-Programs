@@ -48,20 +48,23 @@ function event_api.cancel(timer_id) end
 ---@param timeout number? if passed the function will wait for a new event for this many seconds at maximum then returns `nil` if no event was queued during that time.
 ---@param event OC.Event.Type? an event pattern that will act as a filter. If given then only events that match this pattern will be returned. Can be `nil` in which case the event names will not be filtered. See `string.match` on how to use patterns.
 ---@param ... any any number of parameters in the same order as defined by the signal that is expected. Those arguments will act as filters for the additional arguments returned by the signal. Direct equality is used to determine if the argument is equal to the given filter. Can be `nil` in which case this particular argument will not be filtered.
----@return OC.Event.Type, ...
+---@return OC.Event.Type event
+---@return any ...
 function event_api.pull(timeout, event, ...) end
 
 --- Pulls and returns the next available event from the queue, or waits until one becomes available but allows filtering by specifying filter function.
 --- 
 ---@param timeout number? if passed the function will wait for a new event for this many seconds at maximum then returns `nil` if no event was queued during that time.
 ---@param filter fun(event: OC.Event.Type, ...: any): boolean if passed the function will use it as a filtering function of events. Allows for advanced filtering.
----@return OC.Event.Type, ...
+---@return OC.Event.Type event
+---@return any ...
 function event_api.pullFiltered(timeout, filter) end
 
 --- As its arguments `pullMultiple` accepts multiple event names to be pulled, allowing basic filtering of multiple events at once.
 --- 
 ---@param ... OC.Event.Type
----@return OC.Event.Type, ...
+---@return OC.Event.Type event
+---@return any ...
 function event_api.pullMultiple(...) end
 
 --- Global event callback error handler.
