@@ -1,7 +1,7 @@
 ---@meta
 ---@source https://ocdoc.cil.li/api:serialization
 
--- RC API
+-- Serialization API
 
 --- This module provides simple value serialization.
 --- 

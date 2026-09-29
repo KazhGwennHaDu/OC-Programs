@@ -1,6 +1,8 @@
 ---@meta
 ---@source https://ocdoc.cil.li/api:text
 
+-- Text API
+
 --- This API provides some more general operations on strings and data serialization into and back from strings.
 --- 
 ---@class oc.api.text
