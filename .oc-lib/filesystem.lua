@@ -10,10 +10,10 @@
 --- 
 --- Not to be confused with the Filesystem component with which this API works.
 --- 
----@class OC.Filesystem
-local filesystem_api = {}
+---@class oc.api.filesystem
+local filesystem = {}
 
----@alias OC.Filesystem.Label string
+---@alias oc.api.filesystem.label string
 
 --- Returns whether autorun is currently enabled.
 --- 
@@ -21,12 +21,13 @@ local filesystem_api = {}
 --- If such a file exists, it is executed.
 --- 
 ---@return boolean
-function filesystem_api.isAutorunEnabled() end
+---@nodiscard
+function filesystem.isAutorunEnabled() end
 
 --- Sets whether autorun files should be ran on startup.
 --- 
 ---@param en boolean
-function filesystem_api.setAutorunEnabled(en) end
+function filesystem.setAutorunEnabled(en) end
 
 --- Returns the canonical form of the specified path, i.e. a path containing no “indirections” such as `.` or `..`.
 --- For example, the paths `/tmp/../bin/ls.lua` and `/bin/./ls.lua` are equivalent, and their canonical form is `/bin/ls.lua`.
@@ -37,7 +38,8 @@ function filesystem_api.setAutorunEnabled(en) end
 --- 
 ---@param path string
 ---@return string
-function filesystem_api.canonical(path) end
+---@nodiscard
+function filesystem.canonical(path) end
 
 --- Returns a table containing one entry for each canonical segment of the given path.
 --- 
@@ -48,7 +50,8 @@ function filesystem_api.canonical(path) end
 --- 
 ---@param path string
 ---@return string[]
-function filesystem_api.segments(path) end
+---@nodiscard
+function filesystem.segments(path) end
 
 --- Concatenates two or more paths.
 --- 
@@ -57,21 +60,24 @@ function filesystem_api.segments(path) end
 --- 
 ---@param ... string
 ---@return string
-function filesystem_api.concat(...) end
+---@nodiscard
+function filesystem.concat(...) end
 
 --- Returns the path component of a path to a file,
 --- i.e. everything before the last slash in the canonical form of the specified path.
 --- 
 ---@param path string
 ---@returns string
-function filesystem_api.path(path) end
+---@nodiscard
+function filesystem.path(path) end
 
 --- Returns the file name component of a path to a file,
 --- i.e. everything after the last slash in the canonical form of the specified path.
 --- 
 ---@param path string
 ---@return string
-function filesystem_api.name(path) end
+---@nodiscard
+function filesystem.name(path) end
 
 --- This is similar to `component.proxy`, except that the specified string may also be a file system component's label.
 --- We check for the label first, if no file system has the specified label we fall back to `component.proxy`.
@@ -79,9 +85,10 @@ function filesystem_api.name(path) end
 --- Returns the proxy of the specified file system, or `nil` and an error message if no file system matching the specified filter was found.
 --- 
 ---@param filter string
----@return OC.Component.Filesystem? fs
+---@return oc.component.filesystem? fs
 ---@return string? errmsg
-function filesystem_api.proxy(filter) end
+---@nodiscard
+function filesystem.proxy(filter) end
 
 --- Mounts a file system at the specified path.
 --- 
@@ -90,17 +97,18 @@ function filesystem_api.proxy(filter) end
 --- 
 --- Returns `true` if the file system was successfully mounted, `nil` and an error message otherwise.
 --- 
----@param fs OC.Component.Filesystem | OC.Component.Address | OC.Filesystem.Label
+---@param fs oc.component.filesystem | oc.component.address | oc.api.filesystem.label
 ---@param path string
 ---@return boolean? ok
 ---@return string? errmsg
-function filesystem_api.mount(fs, path) end
+function filesystem.mount(fs, path) end
 
 --- Returns an iterator function over all currently mounted file system component's proxies and the paths at which they are mounted.
 --- This means the same proxy may appear multiple times, but with different mount paths.
 --- 
----@return fun(): OC.Component.Filesystem, string iterator
-function filesystem_api.mounts() end
+---@return fun(): oc.component.filesystem, string iterator
+---@nodiscard
+function filesystem.mounts() end
 
 --- Unmounts a file system.
 --- 
@@ -109,15 +117,16 @@ function filesystem_api.mounts() end
 --- or a path into the global directory structure,
 --- in which case the file system mount containing that directory will be unmounted.
 --- 
----@param fs_path OC.Component.Filesystem | string
+---@param fs_path oc.component.filesystem | string
 ---@return boolean
-function filesystem_api.umount(fs_path) end
+function filesystem.umount(fs_path) end
 
 --- Checks if the object at the specified path is a symlink, if so returns the path to where it links.
 --- 
 ---@param path string
 ---@return boolean, string?
-function filesystem_api.isLink(path) end
+---@nodiscard
+function filesystem.isLink(path) end
 
 --- Creates a symbolic link to the specified target path at the specified path.
 --- 
@@ -130,22 +139,24 @@ function filesystem_api.isLink(path) end
 ---@param linkpath string
 ---@return boolean? ok
 ---@return string? errmsg
-function filesystem_api.link(target, linkpath) end
+function filesystem.link(target, linkpath) end
 
 --- Gets the file system component's proxy that contains the specified path.
 --- 
 --- Returns the `proxy` and mount path, or `nil` and an error message.
 --- 
 ---@param path string
----@return OC.Component.Filesystem? fs
+---@return oc.component.filesystem? fs
 ---@return string mount_errmsg
-function filesystem_api.get(path) end
+---@nodiscard
+function filesystem.get(path) end
 
 --- Checks whether a file or folder exist at the specified path.
 --- 
 ---@param path string
 ---@return boolean
-function filesystem_api.exists(path) end
+---@nodiscard
+function filesystem.exists(path) end
 
 --- Gets the file size of the file at the specified location.
 --- 
@@ -153,7 +164,8 @@ function filesystem_api.exists(path) end
 --- 
 ---@param path string
 ---@return number
-function filesystem_api.size(path) end
+---@nodiscard
+function filesystem.size(path) end
 
 --- Gets whether the path points to a directory.
 --- 
@@ -161,14 +173,16 @@ function filesystem_api.size(path) end
 --- 
 ---@param path string
 ---@return boolean
-function filesystem_api.isDirectory(path) end
+---@nodiscard
+function filesystem.isDirectory(path) end
 
 --- Returns the *real world* unix timestamp of the last time the file at the specified path was modified.
 --- For directories this is usually the time of their creation.
 --- 
 ---@param path string
 ---@return number
-function filesystem_api.lastModified(path) end
+---@nodiscard
+function filesystem.lastModified(path) end
 
 --- Returns an iterator over all elements in the directory at the specified path.
 --- 
@@ -179,7 +193,8 @@ function filesystem_api.lastModified(path) end
 ---@param path string
 ---@return (fun(): string)? iterator
 ---@return string? errmsg
-function filesystem_api.list(path) end
+---@nodiscard
+function filesystem.list(path) end
 
 --- Creates a new directory at the specified path.
 --- Creates any parent directories that do not exist yet, if necessary.
@@ -189,7 +204,7 @@ function filesystem_api.list(path) end
 ---@param path string
 ---@return boolean? ok
 ---@return string? errmsg
-function filesystem_api.makeDirectory(path) end
+function filesystem.makeDirectory(path) end
 
 --- Deletes a file or folder.
 --- If the path specifies a folder, deletes all files and subdirectories in the folder, recursively.
@@ -199,7 +214,7 @@ function filesystem_api.makeDirectory(path) end
 ---@param path string
 ---@return boolean? ok
 ---@return string? errmsg
-function filesystem_api.remove(path) end
+function filesystem.remove(path) end
 
 --- Renames a file or folder.
 --- 
@@ -212,7 +227,7 @@ function filesystem_api.remove(path) end
 ---@param new string
 ---@return boolean? ok
 ---@return string? errmsg
-function filesystem_api.rename(old, new) end
+function filesystem.rename(old, new) end
 
 --- Copies a file to the specified location.
 --- The target path has to contain the target file name.
@@ -223,7 +238,7 @@ function filesystem_api.rename(old, new) end
 ---@param to string
 ---@return boolean? ok
 ---@return string? errmsg
-function filesystem_api.copy(from, to) end
+function filesystem.copy(from, to) end
 
 --- Opens a file at the specified path for reading or writing.
 --- If mode is not specified it defaults to `r`. Possible modes are: `r`, `rb`, `w`, `wb`, `a` and `ab`.
@@ -240,6 +255,7 @@ function filesystem_api.copy(from, to) end
 ---@param mode openmode?
 ---@return file*?
 ---@return string? errmsg
-function filesystem_api.open(path, mode) end
+---@nodiscard
+function filesystem.open(path, mode) end
 
-return filesystem_api
+return filesystem

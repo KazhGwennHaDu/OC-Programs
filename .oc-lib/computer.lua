@@ -3,22 +3,26 @@
 
 -- Computer API
 
--- This API mainly provides information about the computer a Lua state is running on, such as its address and uptime.
--- It also contains functions for user management.
--- This could belong to the `os` table, but in order to keep that "clean" it's in its own API.
-
----@class OC.Computer
-local computer_api = {}
+--- This API mainly provides information about the computer a Lua state is running on, such as its address and uptime.
+--- 
+--- It also contains functions for user management.
+--- 
+--- This could belong to the `os` table, but in order to keep that "clean" it's in its own API.
+--- 
+---@class oc.api.computer
+local computer = {}
 
 --- The component address of this computer.
 --- 
----@return OC.Component.Address
-function computer_api.address() end
+---@return oc.component.address
+---@nodiscard
+function computer.address() end
 
 --- The component address of the computer's temporary file system (if any), used for mounting it on startup.
 --- 
----@return OC.Component.Address
-function computer_api.tmpAddress() end
+---@return oc.component.address
+---@nodiscard
+function computer.tmpAddress() end
 
 --- The amount of memory currently unused, in bytes.
 --- If this gets close to zero your computer will probably soon crash with an out of memory error.
@@ -27,31 +31,36 @@ function computer_api.tmpAddress() end
 --- The os will boot on a single tier 1 ram stick, but quickly and easily run out of memory.
 --- 
 ---@return number
-function computer_api.freeMemory() end
+---@nodiscard
+function computer.freeMemory() end
 
 --- The total amount of memory installed in this computer, in bytes.
 --- 
 ---@return number
-function computer_api.totalMemory() end
+---@nodiscard
+function computer.totalMemory() end
 
 --- The amount of energy currently available in the network the computer is in.
 --- For a robot this is the robot's own energy / fuel level.
 --- 
 ---@return number
-function computer_api.energy() end
+---@nodiscard
+function computer.energy() end
 
 --- The maximum amount of energy that can be stored in the network the computer is in.
 --- For a robot this is the size of the robot's internal buffer (what you see in the robot's GUI).
 --- 
 ---@return number
-function computer_api.maxEnergy() end
+---@nodiscard
+function computer.maxEnergy() end
 
 --- The time in real world seconds this computer has been running,
 --- measured based on the world time that passed since it was started,
 --- meaning this will not increase while the game is paused.
 --- 
 ---@return number
-function computer_api.uptime() end
+---@nodiscard
+function computer.uptime() end
 
 --- Shuts down the computer. Optionally reboots the computer, if `reboot` is `true`,
 --- i.e. shuts down, then starts it again automatically.
@@ -60,18 +69,19 @@ function computer_api.uptime() end
 --- 
 ---@param reboot boolean?
 ---@noreturn
-function computer_api.shutdown(reboot) end
+function computer.shutdown(reboot) end
 
 --- Get the address of the filesystem component from which to try to boot first.
 --- 
----@return OC.Component.Address
-function computer_api.getBootAddress() end
+---@return oc.component.address
+---@nodiscard
+function computer.getBootAddress() end
 
 --- Set the address of the filesystem component from which to try to boot first.
 --- Call with `nil` / no arguments to clear.
 --- 
----@param address OC.Component.Address?
-function computer_api.setBootAddress(address) end
+---@param address oc.component.address?
+function computer.setBootAddress(address) end
 
 --- Returns the current runlevel the computer is in.
 --- 
@@ -80,7 +90,8 @@ function computer_api.setBootAddress(address) end
 --- - `1`: Single-User mode, filesystems and components initialized - OpenOS finished booting
 --- 
 ---@return string | integer
-function computer_api.runlevel() end
+---@nodiscard
+function computer.runlevel() end
 
 --- A list of all users registered on this computer, as a tuple.
 --- To iterate the result as a list, use `table.pack` on it, first.
@@ -88,7 +99,8 @@ function computer_api.runlevel() end
 --- Please see the user rights documentation.
 --- 
 ---@return string ...
-function computer_api.users() end
+---@nodiscard
+function computer.users() end
 
 --- Registers a new user with this computer.
 --- 
@@ -101,7 +113,7 @@ function computer_api.users() end
 ---@param player string
 ---@return boolean? ok
 ---@return string? errmsg
-function computer_api.addUser(player) end
+function computer.addUser(player) end
 
 --- Unregisters a user from this computer.
 --- 
@@ -113,7 +125,7 @@ function computer_api.addUser(player) end
 --- 
 ---@param player string
 ---@return boolean
-function computer_api.removeUser(player) end
+function computer.removeUser(player) end
 
 --- Pushes a new signal into the queue.
 --- Signals are processed in a FIFO order.
@@ -127,9 +139,9 @@ function computer_api.removeUser(player) end
 --- That is, tables must compose types supported, such as other strings and numbers, or even sub tables.
 --- But not of functions or threads.
 --- 
----@param signal string
----@param ... nil | boolean | number | string | table
-function computer_api.pushSignal(signal, ...) end
+---@param name string
+---@param ... any
+function computer.pushSignal(name, ...) end
 
 --- Tries to pull a signal from the queue, waiting up to the specified amount of time before failing and returning `nil`.
 --- If no timeout is specified waits forever.
@@ -139,24 +151,25 @@ function computer_api.pushSignal(signal, ...) end
 --- The return value is the very same, but the `event` library provides some more options.
 --- 
 ---@param timeout number?
----@return string signal
+---@return string name
 ---@return any ...
-function computer_api.pullSignal(timeout) end
+function computer.pullSignal(timeout) end
 
 --- Causes the computer to produce a beep sound at frequency Hz for duration seconds.
 --- 
 ---@param frequency number? between 20 and 2000.
 ---@param duration number?
-function computer_api.beep(frequency, duration) end
+function computer.beep(frequency, duration) end
 
 --- This method is overloaded taking a single string parameter as a pattern of dots . and dashes - for short and long beeps respectively.
 --- 
 ---@param pattern string
-function computer_api.beep(pattern) end
+function computer.beep(pattern) end
 
 --- Returns a table of information about installed devices in the computer.
 --- 
----@return table<OC.Component.Address, table>
-function computer_api.getDeviceInfo() end
+---@return table<oc.component.address, table>
+---@nodiscard
+function computer.getDeviceInfo() end
 
-return computer_api
+return computer

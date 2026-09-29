@@ -1,8 +1,17 @@
 ---@meta
 ---@source https://ocdoc.cil.li/api:colors
 
----@enum OC.Colors
-local colors_api = {
+-- Colors API
+
+--- This "API" serves a global table that allows you to refer to colors by their name,
+--- instead of their associated ID/number.
+--- 
+--- The table serves as a look-up in both directions,
+--- so for example `colors.blue` has the value `11`,
+--- whereas `colors[11]` has the string value `blue`.
+--- 
+---@enum oc.api.colors
+local colors = {
     white     = 0x00,
     orange    = 0x01,
     magenta   = 0x02,
@@ -19,6 +28,7 @@ local colors_api = {
     green     = 0x0D,
     red       = 0x0E,
     black     = 0x0F,
+
     [0x00]    = "white",
     [0x01]    = "orange",
     [0x02]    = "magenta",
@@ -37,4 +47,4 @@ local colors_api = {
     [0x0F]    = "black",
 }
 
-return colors_api
+return colors

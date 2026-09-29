@@ -3,7 +3,14 @@
 
 -- Buffer Stream Interface
 
----@class OC.Buffer.IStream
+--- The following methods can only be called on instances created by `buffer.new`
+--- (note file handles returned by `io.open` are also buffered streams, created with `buffer.new`).
+--- These methods are instance methods, requiring instance call notation `:`.
+--- 
+--- In order to help differentiate these instance methods from static methods (e.g. `buffer.new`),
+--- `b:` will be used to prefix the method names.
+--- 
+---@class oc.api.buffer.istream
 local istream = {}
 
 --- Return `n` bytes, and **not** `n` unicode-aware chars.
@@ -49,10 +56,21 @@ function istream:close() end
 
 -- Buffer API
 
----@class OC.Buffer:file*
-local buffer_api = {}
+--- The `buffer` library provides user friendly streams.
+--- These are the kind that the `io` library returns from `io.open`
+--- unlike the raw streams returned by `filesystem.open` which don't support as many helpful methods.
+--- These helper methods on the file handles you get from `io.open` are defined here, under Instance Methods.
+--- Thus, this API documentation is important and helpful even if you aren't building your own buffered streams.
+--- 
+--- Additionally, this API allows you to create buffered streams.
+--- You provide the backend stream read and write, the buffer library provides the formatting and buffering of the data.
+--- Generally, users will not need to make their own buffered streams.
+--- For reference, the io library uses buffered streams (which includes file io as well as terminal io).
+--- 
+---@class oc.api.buffer:file*
+local buffer = {}
 
----@alias OC.Buffer.Mode
+---@alias oc.api.buffer.mode
 ---|>"r"
 ---| "w"
 ---| "rw"
@@ -62,8 +80,9 @@ local buffer_api = {}
 --- 
 --- Read about the stream interface methods required on the `stream` object.
 --- 
----@param mode? OC.Buffer.Mode
----@param stream OC.Buffer.IStream
-function buffer_api.new(mode, stream) end
+---@param mode? oc.api.buffer.mode
+---@param stream oc.api.buffer.istream
+---@nodiscard
+function buffer.new(mode, stream) end
 
-return buffer_api
+return buffer
