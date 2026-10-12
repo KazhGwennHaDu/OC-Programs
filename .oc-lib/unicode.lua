@@ -69,7 +69,7 @@ function unicode.reverse(s) end
 --- 
 ---@param s string
 ---@param i integer
----@param j integer
+---@param j integer?
 ---@return string
 ---@nodiscard
 function unicode.sub(s, i, j) end
