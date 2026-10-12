@@ -70,19 +70,35 @@ function istream:close() end
 ---@class oc.api.buffer:file*
 local buffer = {}
 
----@alias oc.api.buffer.mode
----|>"r"
----| "w"
----| "rw"
-
 --- Creates a new buffered stream, wrapping `stream` with read-write `mode`.
 --- `mode` can be readonly (`r` or `nil`), read-write (`rw`), or write-only (`w`).
 --- 
 --- Read about the stream interface methods required on the `stream` object.
 --- 
----@param mode? oc.api.buffer.mode
+---@param mode? openmode
 ---@param stream oc.api.buffer.istream
 ---@nodiscard
 function buffer.new(mode, stream) end
+
+--- Returns the current timeout (in seconds) set on the buffered stream. `math.huge` is the default timeout.
+--- Read `setTimeout` for more information about the effects of a buffered stream timeout.
+--- 
+---@return number
+---@nodiscard
+function buffer:getTimeout() end
+
+--- Sets the time in seconds a buffered stream will try to limit a `read` operation.
+--- 
+--- Note that this timeout cannot be strictly adhered to.
+--- A read operation that completes within a single `readChunk` (an internal method that invokes
+--- the actual `read` on the stream) does not check the `timeout` limit.
+--- 
+--- Timeout is only checked between stream reads within a single buffered read (an example follows).
+--- Thus, if a read requires multiple chunk reads,
+--- and the time between the start of the first read before the start of the last read is greater than or equal to the timeout,
+--- then the buffered stream will error. Again note that a timeout is default `math.huge`.
+--- 
+---@param timeout number
+function buffer:setTimeout(timeout) end
 
 return buffer
