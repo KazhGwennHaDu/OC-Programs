@@ -28,7 +28,7 @@
 --- So if you register your handler and pull at the same time, you would receive events twice.
 --- 
 ---@class oc.api.event
-local event = {}
+local event = { handlers = {} }
 
 ---@alias oc.api.event.type string
 
