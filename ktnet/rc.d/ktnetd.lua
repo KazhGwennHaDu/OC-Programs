@@ -6,12 +6,12 @@ local daemon = require "ktnet.daemon"
 ---@return string
 local function getStatusColor(status)
     local colors = {
-        ["running"]   = "",
-        ["suspended"] = "",
-        ["dead"]      = "",
-        ["stopped"]   = "",
+        ["running"]   = "\x1B[0;32m",
+        ["suspended"] = "\x1B[0;33m",
+        ["dead"]      = "\x1B[0;31m",
+        ["stopped"]   = "\x1B[0m",
     }
-    return colors[status] or ""
+    return colors[status] or "\x1B[0m"
 end
 
 -- rc.d
@@ -36,5 +36,5 @@ end
 function status()
     local status = daemon.status()
     local color = getStatusColor(status)
-    print("ktnet " .. color .. status)
+    print("ktnet " .. color .. status .. "\x1B[0m")
 end
