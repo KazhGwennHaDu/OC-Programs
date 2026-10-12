@@ -17,7 +17,7 @@ local interrupt_sig = false
 
 local this = {
     config = nil,
-    ---@type table<string, OC.ThreadHandle>
+    ---@type table<string, oc.api.thread.handle>
     sessions = {},
 
     stop_sig = nil,
