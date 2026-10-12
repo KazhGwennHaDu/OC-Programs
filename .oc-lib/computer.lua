@@ -71,9 +71,9 @@ function computer.uptime() end
 ---@noreturn
 function computer.shutdown(reboot) end
 
---- Get the address of the filesystem component from which to try to boot first.
+--- Get the address of the `filesystem` component from which to try to boot first.
 --- 
----@return oc.component.address
+---@return oc.component.address?
 ---@nodiscard
 function computer.getBootAddress() end
 
@@ -155,21 +155,104 @@ function computer.pushSignal(name, ...) end
 ---@return any ...
 function computer.pullSignal(timeout) end
 
---- Causes the computer to produce a beep sound at frequency Hz for duration seconds.
+--- Plays a tone, useful to alert users via audible feedback.
 --- 
----@param frequency number? between 20 and 2000.
----@param duration number?
+--- Supports frequencies from 20 to 2000Hz, with a duration of up to 5 seconds.
+--- 
+--- This method is overloaded taking a single string parameter
+--- as a pattern of dots `.` and dashes `-` for short and long beeps respectively.
+--- 
+---@overload fun(pattern: string)
+---@param frequency number? between 20 and 2000 Hz.
+---@param duration number? 0 to 5 seconds.
 function computer.beep(frequency, duration) end
-
---- This method is overloaded taking a single string parameter as a pattern of dots . and dashes - for short and long beeps respectively.
---- 
----@param pattern string
-function computer.beep(pattern) end
 
 --- Returns a table of information about installed devices in the computer.
 --- 
 ---@return table<oc.component.address, table>
 ---@nodiscard
 function computer.getDeviceInfo() end
+
+--- Returns architecture of CPU, can be "Lua 5.3/2".
+--- 
+---@return "Lua 5.2"|"Lua 5.3"
+---@nodiscard
+function computer.getArchitecture() end
+
+--- Method for set architecture?
+--- 
+--- I don't know why computer have this, but...
+--- 
+---@param arch "Lua 5.2"|"Lua 5.3"
+function computer.setArchitecture(arch) end
+
+--- Returns list of architectures, for 1.8.9a it is:
+--- 
+---     {"Lua 5.2", "Lua 5.3"}
+--- 
+---@return string[]
+---@nodiscard
+function computer.getArchitectures() end
+
+--- Return a list of tables, which contain a `filename` and `loot_disk_id`,
+--- see dump below.
+--- 
+--- ```txt
+--- 1:table: 00000000261fb260
+---   1:dig
+---   2:dig
+--- 2:table: 00000000261fa460
+---   1:oppm
+---   2:oppm
+--- 3:table: 00000000261fa7a0
+---   1:md5sum
+---   2:data
+--- 4:table: 00000000261faf60
+---   1:maze
+---   2:maze
+--- 5:table: 00000000261faea0
+---   1:sha256sum
+---   2:data
+--- 6:table: 00000000261fabe0
+---   1:irc
+---   2:irc
+--- 7:table: 00000000261fac20
+---   1:deflate
+---   2:data
+--- 8:table: 00000000261face0
+---   1:gpg
+---   2:data
+--- 9:table: 00000000261faee0
+---   1:ifconfig
+---   2:network
+--- 10:table: 00000000261fa4a0
+---   1:ping
+---   2:network
+--- 11:table: 00000000261fa820
+---   1:base64
+---   2:data
+--- 12:table: 00000000261fac60
+---   1:route
+---   2:network
+--- 13:table: 00000000261fa8e0
+---   1:inflate
+---   2:data
+--- 14:table: 00000000261fa920
+---   1:arp
+---   2:network
+--- 15:table: 00000000261fa960
+---   1:opl-flash
+---   2:openloader
+--- 16:table: 00000000261fafa0
+---   1:build
+---   2:builder
+--- 17:table: 00000000261fa4e0
+---   1:refuel
+---   2:generator
+--- ```
+--- 
+---@return table[][]
+---@nodiscard
+function computer.getProgramLocations() end
 
 return computer
