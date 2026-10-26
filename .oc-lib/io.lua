@@ -1,4 +1,4 @@
----@meta
+---@meta _
 ---@source https://ocdoc.cil.li/api:non-standard-lua-libs#input_and_output_facilities
 
 ---Sets `file` as the default error file.

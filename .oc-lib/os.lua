@@ -1,4 +1,4 @@
----@meta
+---@meta _
 ---@source https://ocdoc.cil.li/api:non-standard-lua-libs#operating_system_facilities
 
 --- Allows pausing a script for the specified amount of time.
