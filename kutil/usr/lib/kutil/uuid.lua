@@ -1,4 +1,4 @@
----@class KUtil.UUID:OC.UUID
+---@class KUtil.UUID:oc.api.uuid
 local uuid = require "uuid"
 
 local UUID_MATCH = "%x%x%x%x%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%-%x%x%x%x%x%x%x%x%x%x%x%x"
