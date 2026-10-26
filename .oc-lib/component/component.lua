@@ -6,6 +6,7 @@
 
 ---@class oc.component.proxy
 ---@field address oc.component.address
+---@field slot integer
 ---@field type oc.component.type
 
 ---@alias oc.component.color_depth
