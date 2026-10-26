@@ -13,13 +13,13 @@ local gpu = { type = "gpu" }
 ---@param address oc.component.address
 ---@param reset boolean
 ---@return boolean, string?
-function bind(address, reset) end
+function gpu.bind(address, reset) end
 
 --- Get the address of the screen the GPU is bound to. Since 1.3.2.
 --- 
 ---@return oc.component.address
 ---@nodiscard
-function getScreen() end
+function gpu.getScreen() end
 
 --- Gets the current background color. This background color is applied to all "pixels" that get changed by other operations.
 --- 
@@ -29,7 +29,7 @@ function getScreen() end
 ---@return integer color
 ---@return boolean is_index
 ---@nodiscard
-function getBackground() end
+function gpu.getBackground() end
 
 --- Sets the background color to apply to "pixels" modified by other operations from now on.
 --- The returned value is the old background color,
@@ -43,14 +43,14 @@ function getBackground() end
 ---@param is_index boolean
 ---@return integer old_color_rgb
 ---@return integer? old_color_index
-function setBackground(color, is_index) end
+function gpu.setBackground(color, is_index) end
 
 --- Like getBackground, but for the foreground color.
 --- 
 ---@return integer color
 ---@return boolean is_index
 ---@nodiscard
-function getForeground() end
+function gpu.getForeground() end
 
 --- Like setBackground, but for the foreground color.
 --- 
@@ -58,33 +58,33 @@ function getForeground() end
 ---@param is_index boolean
 ---@return integer old_color_rgb
 ---@return integer? old_color_index
-function setForeground(color, is_index) end
+function gpu.setForeground(color, is_index) end
 
 --- Gets the RGB value of the color in the palette at the specified index.
 --- 
 ---@param index integer
 ---@return integer
 ---@nodiscard
-function getPaletteColor(index) end
+function gpu.getPaletteColor(index) end
 
 --- Sets the RGB value of the color in the palette at the specified index.
 --- 
 ---@param index integer
 ---@param value integer
 ---@return integer
-function setPaletteColor(index, value) end
+function gpu.setPaletteColor(index, value) end
 
 --- Gets the maximum supported color depth supported by the GPU and the screen it is bound to (minimum of the two).
 --- 
 ---@return oc.component.color_depth
 ---@nodiscard
-function maxDepth() end
+function gpu.maxDepth() end
 
 --- The currently set color depth of the GPU/screen, in bits. Can be 1, 4 or 8.
 --- 
 ---@return oc.component.color_depth
 ---@nodiscard
-function getDepth() end
+function gpu.getDepth() end
 
 --- Sets the color depth to use.
 --- Can be up to the maximum supported color depth.
@@ -93,21 +93,21 @@ function getDepth() end
 --- 
 ---@param bit oc.component.color_depth
 ---@return oc.component.color_depth_string old_depth
-function setDepth(bit) end
+function gpu.setDepth(bit) end
 
 --- Gets the maximum resolution supported by the GPU and the screen it is bound to (minimum of the two).
 --- 
 ---@return integer width
 ---@return integer height
 ---@nodiscard
-function maxResolution() end
+function gpu.maxResolution() end
 
 --- Gets the currently set resolution.
 --- 
 ---@return integer width
 ---@return integer height
 ---@nodiscard
-function getResolution() end
+function gpu.getResolution() end
 
 --- Sets the specified resolution. Can be up to the maximum supported resolution.
 --- If a larger or invalid resolution is provided it will throw an error.
@@ -116,14 +116,14 @@ function getResolution() end
 ---@param width integer
 ---@param height integer
 ---@return boolean
-function setResolution(width, height) end
+function gpu.setResolution(width, height) end
 
 --- Get the current viewport resolution.
 --- 
 ---@return integer width
 ---@return integer height
 ---@nodiscard
-function getViewport() end
+function gpu.getViewport() end
 
 --- Set the current viewport resolution.
 --- Returns true if it was changed (may return false if an attempt was made to set it to the same value it was set before), false otherwise.
@@ -134,7 +134,7 @@ function getViewport() end
 ---@param width integer
 ---@param height integer
 ---@return boolean
-function setViewport(width, height) end
+function gpu.setViewport(width, height) end
 
 ---@deprecated Use screen.getAspectRatio().
 ---
@@ -144,7 +144,7 @@ function setViewport(width, height) end
 ---@return integer width
 ---@return integer height
 ---@nodiscard
-function getSize() end
+function gpu.getSize() end
 
 --- Gets the character currently being displayed at the specified coordinates.
 --- The second and third returned values are the fore- and background color, as hexvalues.
@@ -158,7 +158,7 @@ function getSize() end
 ---@return integer? fg_index
 ---@return integer? bg_index
 ---@nodiscard
-function get(x, y) end
+function gpu.get(x, y) end
 
 --- Writes a string to the screen, starting at the specified coordinates.
 --- The string will be copied to the screen's buffer directly, in a single row.
@@ -173,7 +173,7 @@ function get(x, y) end
 ---@param value string
 ---@param vertical boolean?
 ---@return boolean
-function set(x, y, value, vertical) end
+function gpu.set(x, y, value, vertical) end
 
 --- Copies a portion of the screens buffer to another location.
 --- The source rectangle is specified by the x, y, width and height parameters.
@@ -187,7 +187,7 @@ function set(x, y, value, vertical) end
 ---@param tx integer
 ---@param ty integer
 ---@return boolean
-function copy(x, y, width, height, tx, ty) end
+function gpu.copy(x, y, width, height, tx, ty) end
 
 --- Fills a rectangle in the screen buffer with the specified character.
 --- The target rectangle is specified by the x and y coordinates and the rectangle's width and height.
@@ -203,7 +203,7 @@ function copy(x, y, width, height, tx, ty) end
 ---@param height integer
 ---@param char string
 ---@return boolean
-function fill(x, y, width, height, char) end
+function gpu.fill(x, y, width, height, char) end
 
 -- Buffer Operations
 
@@ -212,7 +212,7 @@ function fill(x, y, width, height, char) end
 --- 
 ---@return integer
 ---@nodiscard
-function getActiveBuffer() end
+function gpu.getActiveBuffer() end
 
 --- Sets the active buffer to index.
 --- 0 is reserved for the screen and can be set even when there is no screen.
@@ -221,13 +221,13 @@ function getActiveBuffer() end
 --- 
 ---@param index integer
 ---@return integer | nil
-function setActiveBuffer(index) end
+function gpu.setActiveBuffer(index) end
 
 --- Returns an array of all current page indexes (0 is not included in this list, that is reserved for the screen).
 --- 
 ---@return integer[]
 ---@nodiscard
-function buffers() end
+function gpu.buffers() end
 
 --- Allocates a new buffer with dimensions width*heigh (gpu max resolution by default).
 --- 
@@ -240,7 +240,7 @@ function buffers() end
 ---@param height integer?
 ---@return integer
 ---@nodiscard
-function allocateBuffer(width, height) end
+function gpu.allocateBuffer(width, height) end
 
 --- Removes buffer at index (default: current buffer index).
 --- 
@@ -250,25 +250,25 @@ function allocateBuffer(width, height) end
 --- 
 ---@param index integer?
 ---@return boolean
-function freeBuffer(index) end
+function gpu.freeBuffer(index) end
 
 --- Removes all buffers, freeing all video memory.
 --- The buffer index is always 0 after this call.
 --- 
-function freeAllBuffers() end
+function gpu.freeAllBuffers() end
 
 --- Returns the total memory size of the gpu vram. This does not include the screen.
 --- 
 ---@return integer
 ---@nodiscard
-function totalMemory() end
+function gpu.totalMemory() end
 
 --- Returns the total free memory not allocated to buffers.
 --- This does not include the screen.
 --- 
 ---@return integer
 ---@nodiscard
-function freeMemory() end
+function gpu.freeMemory() end
 
 --- Returns the buffer size at index (default: current buffer index).
 --- Returns the screen resolution for index 0.
@@ -278,7 +278,7 @@ function freeMemory() end
 ---@return integer | nil width
 ---@return integer | nil height
 ---@nodiscard
-function getBufferSize(index) end
+function gpu.getBufferSize(index) end
 
 --- Copy a region from buffer to buffer, screen to buffer, or buffer to screen.
 --- 
@@ -306,4 +306,4 @@ function getBufferSize(index) end
 ---@param fromCol integer
 ---@param fromRow integer
 ---@return boolean
-function bitblt(dst, col, row, width, height, src, fromCol, fromRow) end
+function gpu.bitblt(dst, col, row, width, height, src, fromCol, fromRow) end

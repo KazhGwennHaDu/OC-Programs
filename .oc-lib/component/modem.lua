@@ -17,7 +17,7 @@ local modem = { type = "modem" }
 --- 
 ---@return integer
 ---@nodiscard
-function maxPacketSize() end
+function modem.maxPacketSize() end
 
 --- Returns whether the specified "port" is currently being listened on.
 --- 
@@ -26,7 +26,7 @@ function maxPacketSize() end
 ---@param port integer
 ---@return boolean
 ---@nodiscard
-function isOpen(port) end
+function modem.isOpen(port) end
 
 --- Opens the specified port number for listening.
 --- 
@@ -36,7 +36,7 @@ function isOpen(port) end
 --- 
 ---@param port integer
 ---@return boolean
-function open(port) end
+function modem.open(port) end
 
 --- Closes the specified port (default: all ports).
 --- 
@@ -44,7 +44,7 @@ function open(port) end
 --- 
 ---@param port integer?
 ---@return boolean
-function close(port) end
+function modem.close(port) end
 
 --- Sends a network message to the specified address.
 --- 
@@ -66,7 +66,7 @@ function close(port) end
 ---@param port integer
 ---@param ... any
 ---@return boolean
-function send(address, port, ...) end
+function modem.send(address, port, ...) end
 
 --- Sends a broadcast message.
 --- This message is delivered to all reachable network cards.
@@ -80,13 +80,13 @@ function send(address, port, ...) end
 ---@param port integer
 ---@param ... any
 ---@return boolean
-function broadcast(port, ...) end
+function modem.broadcast(port, ...) end
 
 --- Returns whether this modem is capable of sending wireless messages.
 --- 
 ---@return boolean
 ---@nodiscard
-function isWireless() end
+function modem.isWireless() end
 
 --- The current signal strength to apply when sending messages.
 --- 
@@ -94,7 +94,7 @@ function isWireless() end
 --- 
 ---@return number
 ---@nodiscard
-function getStrength() end
+function modem.getStrength() end
 
 --- Sets the signal strength.
 --- 
@@ -106,7 +106,7 @@ function getStrength() end
 --- 
 ---@param value number
 ---@return number
-function setStrength(value) end
+function modem.setStrength(value) end
 
 --- Gets the current wake-up message.
 --- 
@@ -118,7 +118,7 @@ function setStrength(value) end
 --- 
 ---@return string
 ---@nodiscard
-function getWakeMessage() end
+function modem.getWakeMessage() end
 
 --- Sets the wake-up message to the specified string.
 --- 
@@ -128,4 +128,4 @@ function getWakeMessage() end
 ---@param message string
 ---@param fuzzy boolean?
 ---@return string
-function setWakeMessage(message, fuzzy) end
+function modem.setWakeMessage(message, fuzzy) end

@@ -8,37 +8,37 @@ local microcontroller = { type = "microcontroller" }
 --- 
 ---@return boolean
 ---@nodiscard
-function isRunning() end
+function microcontroller.isRunning() end
 
 --- Starts the microcontroller.
 --- Returns true if the state changed.
 --- 
 ---@return boolean
-function start() end
+function microcontroller.start() end
 
 --- Stops the microcontroller.
 --- Returns true if the state changed.
 --- 
 ---@return boolean
-function stop() end
+function microcontroller.stop() end
 
 --- Returns the reason the microcontroller crashed, if applicable.
 --- Returns nil if no crash has occurred.
 --- 
 ---@return string | nil
 ---@nodiscard
-function lastError() end
+function microcontroller.lastError() end
 
 --- Get whether network messages are sent via the specified side.
 --- 
 ---@param side integer
 ---@return boolean
 ---@nodiscard
-function isSideOpen(side) end
+function microcontroller.isSideOpen(side) end
 
 --- Set whether network messages are sent via the specified side.
 --- 
 ---@param side integer
 ---@param open boolean
 ---@return boolean
-function setSideOpen(side, open) end
+function microcontroller.setSideOpen(side, open) end
